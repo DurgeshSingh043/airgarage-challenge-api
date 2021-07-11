@@ -41,6 +41,6 @@ app.get('/getparkingbylocation', function (req, res) {
   }
 });
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log('server running on 8080');
 }); //the server object listens on port 8080
