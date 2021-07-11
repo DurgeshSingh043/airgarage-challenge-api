@@ -19,7 +19,6 @@ app.get('/', function (req, res) {
 
 app.get('/getparkingbylocation', function (req, res) {
   const { location, limit = 20 } = req.query || {};
-  console.log('location ', location);
   if (location) {
     axios
       .get(`${YELP_SEARCH_PARKING_API_URL}${location}&limit=${limit}`, {
@@ -29,6 +28,7 @@ app.get('/getparkingbylocation', function (req, res) {
         },
       })
       .then((response) => {
+        res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600');
         res.status(200).send(response.data);
       })
       .catch((err) => {
